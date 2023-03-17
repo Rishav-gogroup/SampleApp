@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {View, ScrollView} from 'react-native';
+import {View} from 'react-native';
+import EncryptedStorage from 'react-native-encrypted-storage';
 import {ScaledSheet} from 'react-native-size-matters';
 import InputField from '../components/unit/Input';
 import FlatButton from '../components/unit/FlatButton';
@@ -30,6 +31,8 @@ function LoginScreen({navigation}) {
       //set all error to initial state
       setError({});
       // all validation is passed you can make a api call for login to BE and navigate to HomeScreen from here
+      EncryptedStorage.setItem('userToken', 'eeettt12430294');
+      navigation.navigate('Home');
       console.log('signed in successfull', formState);
     }
   };
