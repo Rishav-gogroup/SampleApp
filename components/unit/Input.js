@@ -5,6 +5,17 @@ import ErrorIcon from './Icon/ErrorIcon';
 import Eye from './Icon/Eye';
 import EyeOff from './Icon/EyeOff';
 
+/**
+ * A custom input field which we can use all over app to stay consistent with proper error messages
+ * @author Rishav Pathania
+ * @param {*} props {label, type, onChange, value, keyboardType, placeholder, secureTextEntry, style, error, errorText, maxLength}
+ * all the props that will go a normal input except label, error, errorText
+ * - label is to show what input field is for.
+ * - error is boolean to show error is occurred
+ * - errorText is text value to show what exactly error is occurred
+ * @returns {Object} a react native custom  input.
+ */
+
 export default function InputField({
   label,
   type,
