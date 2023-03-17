@@ -1,17 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {NavigationContainer} from '@react-navigation/native';
 import AuthStack from './src/navigation/AuthStack';
 import BottomTab from './src/navigation/BottomTab';
-
+import Context from './src/context/context';
 function App() {
-  const [userToken, setUserToken] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  const ctx = useContext(Context);
 
   const getToken = async () => {
     const token = await EncryptedStorage.getItem('userToken');
-    setUserToken(token);
-    console.log('token', token);
+    token && ctx.restoreToken(token);
+    console.log('token', ctx.userToken, token);
   };
 
   useEffect(() => {
@@ -20,7 +19,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      {userToken ? <BottomTab /> : <AuthStack />}
+      {ctx.userToken ? <BottomTab /> : <AuthStack />}
     </NavigationContainer>
   );
 }
