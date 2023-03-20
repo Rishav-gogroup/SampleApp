@@ -4,9 +4,11 @@ import {NavigationContainer} from '@react-navigation/native';
 import AuthStack from './src/navigation/AuthStack';
 import BottomTab from './src/navigation/BottomTab';
 import Context from './src/context/context';
+import {useTranslation} from 'react-i18next';
+import './src/language/IMLocalize';
 function App() {
   const ctx = useContext(Context);
-
+  const {t, i18n} = useTranslation();
   const getToken = async () => {
     const token = await EncryptedStorage.getItem('userToken');
     token && ctx.restoreToken(token);
@@ -14,6 +16,7 @@ function App() {
   };
 
   useEffect(() => {
+    i18n.changeLanguage('de');
     getToken();
   }, []);
 

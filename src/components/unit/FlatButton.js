@@ -44,6 +44,8 @@ const styles = ScaledSheet.create({
   },
   primaryBtn: {
     backgroundColor: '#599522',
+    borderWidth: 2,
+    borderColor: '#599522',
   },
   secondaryBtn: {
     backgroundColor: '#2F2F2F',

@@ -6,9 +6,12 @@ import InputField from '../components/unit/Input';
 import FlatButton from '../components/unit/FlatButton';
 import LoginValidation from '../helper/formValidator/LoginValidation';
 import Context from '../context/context';
+import {useTranslation} from 'react-i18next';
 
 function LoginScreen({navigation}) {
   const ctx = useContext(Context);
+  const {t} = useTranslation();
+
   const [formState, setFormState] = useState({
     email: '',
     password: '',
@@ -43,7 +46,7 @@ function LoginScreen({navigation}) {
   return (
     <View>
       <InputField
-        label={'Email'}
+        label={t('common:emailAddress')}
         type="email"
         onChange={e => handleOnChange(e, 'email')}
         keyboardType="email-address"
@@ -52,7 +55,7 @@ function LoginScreen({navigation}) {
         placeholder="Enter Username/Email"
       />
       <InputField
-        label={'Password'}
+        label={t('common:password')}
         type="password"
         onChange={e => handleOnChange(e, 'password')}
         error={error['password']}
@@ -60,13 +63,13 @@ function LoginScreen({navigation}) {
         placeholder="Enter Username/Email"
       />
       <FlatButton
-        title={'Log In'}
+        title={t('Login:loginBtn')}
         style={styles.loginBtn}
         onPress={handleLogin}
         type="primaryBtn"
       />
       <FlatButton
-        title={'Sign Up'}
+        title={t('Login:signupBtn')}
         onPress={() => navigation.navigate('Signup')}
         type="secondaryBtn"
       />
