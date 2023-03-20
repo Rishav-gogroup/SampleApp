@@ -1,10 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, ScrollView} from 'react-native';
+import EncryptedStorage from 'react-native-encrypted-storage';
 import InputField from '../components/unit/Input';
 import FlatButton from '../components/unit/FlatButton';
 import SignupValidation from '../helper/formValidator/SignupValidation';
+import {postSignup} from '../api/NetworkApi';
+import Context from '../context/context';
 
 function SignupScreen({navigation}) {
+  const ctx = useContext(Context);
   const [formState, setFormState] = useState({
     firstName: '',
     lastName: '',
@@ -20,7 +24,7 @@ function SignupScreen({navigation}) {
     setError({...error, [id]: false});
   };
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     const validation = SignupValidation(
       formState,
       setError,
@@ -32,6 +36,19 @@ function SignupScreen({navigation}) {
       //set all error to initial state
       setError({});
       // all validation is passed you can make a api call for sign up to BE and navigate to HomeScreen from here
+      // const res = await postSignup(formState);
+      // if(res.statusCode ==200)
+      // {
+      //signup is successful
+      //add token to local storage and context to navigate to Home Stack;
+      const res = 'eeettt12430294';
+      EncryptedStorage.setItem('userToken', res);
+      ctx.signIn(res);
+      // }
+      // else {
+      //   handle error cases here
+      // }
+
       console.log('signed in successfull', formState);
     }
   };
