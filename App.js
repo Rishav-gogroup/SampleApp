@@ -16,7 +16,6 @@ function App() {
   };
 
   useEffect(() => {
-    i18n.changeLanguage('de');
     getToken();
   }, []);
 

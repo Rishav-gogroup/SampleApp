@@ -3,6 +3,8 @@ import {View, ScrollView} from 'react-native';
 import InputField from '../components/unit/Input';
 import FlatButton from '../components/unit/FlatButton';
 import SignupValidation from '../helper/formValidator/SignupValidation';
+import {useTranslation} from 'react-i18next';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 function SignupScreen({navigation}) {
   const [formState, setFormState] = useState({
@@ -14,7 +16,13 @@ function SignupScreen({navigation}) {
   });
   const [error, setError] = useState({});
   const [errorText, setErrorText] = useState({});
-
+  const {t, i18n} = useTranslation();
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(i18n.language);
+  const [items, setItems] = useState([
+    {label: 'English', value: 'en'},
+    {label: 'German', value: 'de'},
+  ]);
   const handleOnChange = (e, id) => {
     setFormState(state => ({...state, [id]: e}));
     setError({...error, [id]: false});
@@ -76,6 +84,18 @@ function SignupScreen({navigation}) {
         onChange={e => handleOnChange(e, 'confirmPassword')}
         error={error['confirmPassword']}
         errorText={errorText['confirmPassword']}
+      />
+      <DropDownPicker
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
+        onSelectItem={item => {
+          i18n.changeLanguage(item.value);
+        }}
+        style={{borderRadius: 2, marginBottom: 10}}
       />
       <FlatButton
         title={'Sign Up'}

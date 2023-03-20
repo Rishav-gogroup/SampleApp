@@ -82,6 +82,5 @@ export default LoginScreen;
 const styles = ScaledSheet.create({
   loginBtn: {
     marginVertical: '8@vs',
-    height: '44@vs',
   },
 });
